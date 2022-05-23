@@ -10,7 +10,7 @@ import { postData } from "../services/Api";
 /* Styles */
 import "./styles/FormUser.css";
 
-const Register = () => {
+const Register = (props) => {
   /* Hooks que permiten usar el estado en componentes funcionales. */
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
@@ -36,7 +36,7 @@ const Register = () => {
 
   return (
     <React.Fragment>
-      <Ajustes />
+      <Ajustes is_superuser={props.is_superuser}/>
       <div className="content">
         <div className="form-signin m-auto text-center">
           <form onSubmit={handleSubmit}>
