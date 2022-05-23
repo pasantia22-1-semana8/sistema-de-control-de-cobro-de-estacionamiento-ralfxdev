@@ -41,14 +41,16 @@ class App extends Component {
         /* Rutas Privadas */
         <Router>
           <Nav name={this.state.name} />
-          <Routes>
-            <Route path="/" element={<Dashboard name={this.state.name} />} />
-            <Route
-              path="ajustes/register"
-              element={<Register name={this.state.name} />}
-            />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <div className="main">
+            <Routes>
+              <Route path="/" element={<Dashboard name={this.state.name} />} />
+              <Route
+                path="ajustes/register"
+                element={<Register name={this.state.name} />}
+              />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
         </Router>
       );
     } else {
@@ -56,9 +58,11 @@ class App extends Component {
         /* Rutas Públicas */
         <Router>
           <Nav name={this.state.name} />
-          <Routes>
-            <Route path="*" element={<Login name={this.state.name} />} />
-          </Routes>
+          <div className="main">
+            <Routes>
+              <Route path="*" element={<Login name={this.state.name} />} />
+            </Routes>
+          </div>
         </Router>
       );
     }

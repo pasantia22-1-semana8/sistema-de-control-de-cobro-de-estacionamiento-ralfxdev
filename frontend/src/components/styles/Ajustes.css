@@ -3,6 +3,7 @@
 /* El menú de navegación lateral */
 .sidebar {
   margin: 0;
+  margin-top: -78px;
   padding: 0;
   width: 200px;
   background-color: #f1f1f1;
