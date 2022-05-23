@@ -90,7 +90,7 @@ const Nav = (props) => {
     <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
       <div className="container-fluid p-2">
         <Link className="navbar-brand" to="/">
-          ESTACIONAMIENTO
+          PARKING-APP
         </Link>
         <button
           className="navbar-toggler"
