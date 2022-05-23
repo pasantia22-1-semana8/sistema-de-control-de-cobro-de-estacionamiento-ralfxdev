@@ -33,7 +33,7 @@ La instancia se guarda y se devuelve
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'name', 'email', 'password']
+        fields = ('id', 'name', 'username', 'email', 'password', 'is_superuser')
         extra_kwargs = {
             'password': {'write_only': True}
         }
