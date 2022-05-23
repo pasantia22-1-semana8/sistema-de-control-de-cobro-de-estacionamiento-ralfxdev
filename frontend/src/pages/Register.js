@@ -13,13 +13,17 @@ import "./styles/FormUser.css";
 const Register = (props) => {
   /* Hooks que permiten usar el estado en componentes funcionales. */
   const [name, setName] = React.useState("");
+  const [username, setUsername] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [is_superuser, setIsSuperuser] = React.useState(false);
   const [mesage, setMesage] = React.useState("");
+  const [error, setError] = React.useState("");
 
   /**
-   * Cuando el usuario envíe el formulario, subir los datos a la ruta register,
+   * Cuando el usuario envíe el formulario, manda los datos a la ruta register,
    * y responde con el mensaje 'Usuario creado correctamente'.
+   * Si el servidor devuelve un error, lo mostrará en pantalla.
    */
 
   const handleSubmit = async (event) => {
@@ -27,16 +31,22 @@ const Register = (props) => {
 
     postData("register", {
       name,
+      username,
       email,
       password,
+      is_superuser,
+    }).then((data) => {
+      if (data.id) {
+        setMesage("Usuario creado correctamente");
+      } else {
+        setError(data.username || data.email);
+      }
     });
-
-    setMesage("Usuario creado correctamente");
   };
 
   return (
     <React.Fragment>
-      <Ajustes is_superuser={props.is_superuser}/>
+      <Ajustes is_superuser={props.is_superuser} />
       <div className="content">
         <div className="form-signin m-auto text-center">
           <form onSubmit={handleSubmit}>
@@ -60,6 +70,12 @@ const Register = (props) => {
               </div>
             )}
 
+            {error && (
+              <div className="alert alert-danger" role="alert">
+                {error}
+              </div>
+            )}
+
             <div className="form-floating">
               <input
                 type="text"
@@ -68,6 +84,15 @@ const Register = (props) => {
                 onChange={(e) => setName(e.target.value)}
               />
               <label>Nombre</label>
+            </div>
+            <div className="form-floating">
+              <input
+                type="text"
+                className="form-control"
+                required
+                onChange={(e) => setUsername(e.target.value)}
+              />
+              <label>Username</label>
             </div>
             <div className="form-floating">
               <input
@@ -86,6 +111,16 @@ const Register = (props) => {
                 onChange={(e) => setPassword(e.target.value)}
               />
               <label>Contraseña</label>
+            </div>
+            <div className="form-check form-switch pb-2">
+              <input
+                className="form-check-input"
+                type="checkbox"
+                onChange={(e) => setIsSuperuser(e.target.checked)}
+              />
+              <label className="form-check-label">
+                Permisos de administrador
+              </label>
             </div>
             <button className="w-100 btn btn-lg btn-dark" type="submit">
               Crear
