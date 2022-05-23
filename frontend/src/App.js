@@ -11,6 +11,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
+import AjustesGenerales from "./pages/AjustesGenerales";
+import AjustesCuenta from "./pages/AjustesCuenta";
 
 /* Services */
 import { getData } from "./services/Api";
@@ -24,6 +26,7 @@ class App extends Component {
     super(props);
     this.state = {
       name: "",
+      is_superuser: false,
     };
   }
 
@@ -31,24 +34,70 @@ class App extends Component {
     getData("user").then((data) => {
       if (data.name) {
         this.setState({ name: data.name });
+        this.setState({ is_superuser: data.is_superuser });
       }
     });
   }
 
   render() {
-    if (this.state.name) {
+    if (this.state.is_superuser === true && this.state.name !== "") {
       return (
-        /* Rutas Privadas */
+        /* Rutas Admin */
         <Router>
-          <Nav name={this.state.name} />
+          <Nav name={this.state.name} is_superuser={this.state.is_superuser} />
           <div className="main">
             <Routes>
               <Route path="/" element={<Dashboard name={this.state.name} />} />
               <Route
+                path="/ajustes/generales"
+                element={
+                  <AjustesGenerales
+                    name={this.state.name}
+                    is_superuser={this.state.is_superuser}
+                  />
+                }
+              />
+              <Route
+                path="ajustes/cuenta"
+                element={
+                  <AjustesCuenta
+                    name={this.state.name}
+                    is_superuser={this.state.is_superuser}
+                  />
+                }
+              />
+              <Route
                 path="ajustes/register"
-                element={<Register name={this.state.name} />}
+                element={
+                  <Register
+                    name={this.state.name}
+                    is_superuser={this.state.is_superuser}
+                  />
+                }
               />
               <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
+        </Router>
+      );
+    } else if (this.state.is_superuser === false && this.state.name !== "") {
+      return (
+        /* Rutas Empleados */
+        <Router>
+          <Nav name={this.state.name} is_superuser={this.state.is_superuser} />
+          <div className="main">
+            <Routes>
+              <Route path="/" element={<Dashboard name={this.state.name} />} />
+              <Route path="*" element={<NotFound />} />
+              <Route
+                path="ajustes/cuenta"
+                element={
+                  <AjustesCuenta
+                    name={this.state.name}
+                    is_superuser={this.state.is_superuser}
+                  />
+                }
+              />
             </Routes>
           </div>
         </Router>
@@ -57,7 +106,7 @@ class App extends Component {
       return (
         /* Rutas Públicas */
         <Router>
-          <Nav name={this.state.name} />
+          <Nav name={this.state.name} is_superuser={this.state.is_superuser} />
           <div className="main">
             <Routes>
               <Route path="*" element={<Login name={this.state.name} />} />

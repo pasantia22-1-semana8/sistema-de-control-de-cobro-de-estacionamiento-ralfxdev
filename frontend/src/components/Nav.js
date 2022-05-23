@@ -11,26 +11,7 @@ import "./styles/Nav.css";
 const Nav = (props) => {
   let menu;
 
-  if (props.name === "") {
-    menu = (
-      <React.Fragment>
-        <ul className="navbar-nav me-auto mb-2 mb-md-0">
-          <li className="nav-item">
-            <Link className="nav-link" to="/">
-              Documentación
-            </Link>
-          </li>
-        </ul>
-        <ul className="navbar-nav ml-auto">
-          <li className="nav-item">
-            <Link className="nav-link" to="/">
-              Login
-            </Link>
-          </li>
-        </ul>
-      </React.Fragment>
-    );
-  } else {
+  if (props.is_superuser === true && props.name !== "") {
     menu = (
       <React.Fragment>
         <ul className="navbar-nav me-auto mb-2 mb-md-0">
@@ -67,7 +48,7 @@ const Nav = (props) => {
         </ul>
         <ul className="navbar-nav ml-auto">
           <li className="nav-item">
-            <Link className="nav-link" to="/">
+            <Link className="nav-link" to="/ajustes/cuenta">
               {props.name}
             </Link>
           </li>
@@ -77,8 +58,71 @@ const Nav = (props) => {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/ajustes/register">
+            <Link className="nav-link" to="/ajustes/generales">
               Ajustes
+            </Link>
+          </li>
+        </ul>
+      </React.Fragment>
+    );
+  } else if (props.is_superuser === false && props.name !== "") {
+    menu = (
+      <React.Fragment>
+        <ul className="navbar-nav me-auto mb-2 mb-md-0">
+          <li className="nav-item">
+            <Link className="nav-link" aria-current="page" to="/">
+              Dashboard
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/">
+              Vehículos
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/">
+              Clientes
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/">
+              Cobro Residentes
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/">
+              Caja
+            </Link>
+          </li>
+        </ul>
+        <ul className="navbar-nav ml-auto">
+          <li className="nav-item">
+            <Link className="nav-link" to="/ajustes/cuenta">
+              {props.name}
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" onClick={Logout} to="/">
+              Logout
+            </Link>
+          </li>
+        </ul>
+      </React.Fragment>
+    );
+  } else {
+    menu = (
+      <React.Fragment>
+        <ul className="navbar-nav me-auto mb-2 mb-md-0">
+          <li className="nav-item">
+            <Link className="nav-link" to="/">
+              Documentación
+            </Link>
+          </li>
+        </ul>
+        <ul className="navbar-nav ml-auto">
+          <li className="nav-item">
+            <Link className="nav-link" to="/">
+              Login
             </Link>
           </li>
         </ul>
