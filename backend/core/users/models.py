@@ -13,6 +13,7 @@ y REQUIRED_FIELDS para que sea una lista vacía
 
 
 class User(AbstractUser):
+    """Modelo de usuario"""
     name = models.CharField(max_length=255)
     username = models.CharField(max_length=255, unique=True)
     email = models.CharField(max_length=255, unique=True)
@@ -23,6 +24,6 @@ class User(AbstractUser):
 
     is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=True)
-    
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
