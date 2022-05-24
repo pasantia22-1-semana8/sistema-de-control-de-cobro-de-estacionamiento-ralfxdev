@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'users',
     'tarifas',
     'clientes',
+    'vehiculos',
 ]
 
 MIDDLEWARE = [
