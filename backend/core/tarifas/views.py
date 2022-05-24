@@ -29,7 +29,9 @@ class TarifaViewSet(viewsets.ModelViewSet):
 
     def update(self, request, *args, **kwargs):
         tarifa = self.get_object()
+        tarifa.nombre = request.data['nombre']
         tarifa.precio = request.data['precio']
+        tarifa.descripcion = request.data['descripcion']
         tarifa.save()
         return Response({'detail': 'Tarifa actualizada'}, status=200)
     
