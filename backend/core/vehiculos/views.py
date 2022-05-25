@@ -38,6 +38,6 @@ class VehiculoViewSet(viewsets.ModelViewSet):
         vehiculo.marca = request.data['marca']
         vehiculo.modelo = request.data['modelo']
         vehiculo.color = request.data['color']
-        vehiculo.cliente = Cliente.objects.get(id=request.data['cliente'])
+        vehiculo.cliente = Cliente.objects.get(id=request.data['cliente_id'])
         vehiculo.save()
         return Response({'detail': 'Vehiculo actualizado'}, status=200)
