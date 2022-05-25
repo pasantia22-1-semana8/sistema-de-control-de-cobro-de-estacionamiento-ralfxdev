@@ -1,10 +1,10 @@
 import React from "react";
 
 /* Context */
-import { Context } from "../context/Context";
+import { Context } from "../../context/Context";
 
 /* Services */
-import { postData } from "../services/Api";
+import { postData } from "../../services/Api";
 
 const ModalCrearTarifas = () => {
   const [nombre, setNombre] = React.useState("");
@@ -46,14 +46,14 @@ const ModalCrearTarifas = () => {
           type="button"
           className="btn btn-dark"
           data-bs-toggle="modal"
-          data-bs-target="#staticBackdrop"
+          data-bs-target="#modal-crear-tarifa"
         >
           Nueva Tarifa
         </button>
 
         <div
           className="modal fade hide.bs.modal"
-          id="staticBackdrop"
+          id="modal-crear-tarifa"
           data-bs-backdrop="static"
           data-bs-keyboard="false"
           aria-labelledby="staticBackdropLabel"

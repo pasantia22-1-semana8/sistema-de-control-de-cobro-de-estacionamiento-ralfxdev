@@ -36,3 +36,14 @@ export function deleteData(path) {
     credentials: "include",
   });
 }
+
+export function putData(path, data) {
+  return fetch(API + path, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+    body: JSON.stringify(data),
+  }).then((res) => res.json());
+}
