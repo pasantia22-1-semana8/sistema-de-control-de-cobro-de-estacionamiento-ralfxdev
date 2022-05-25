@@ -13,6 +13,7 @@ import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import AjustesGenerales from "./pages/AjustesGenerales";
 import AjustesCuenta from "./pages/AjustesCuenta";
+import AjustesTarifas from "./pages/AjustesTarifas";
 
 /* Services */
 import { getData } from "./services/Api";
@@ -70,6 +71,15 @@ class App extends Component {
                 path="ajustes/register"
                 element={
                   <Register
+                    name={this.state.name}
+                    is_superuser={this.state.is_superuser}
+                  />
+                }
+              />
+              <Route
+                path="ajustes/tarifas"
+                element={
+                  <AjustesTarifas
                     name={this.state.name}
                     is_superuser={this.state.is_superuser}
                   />

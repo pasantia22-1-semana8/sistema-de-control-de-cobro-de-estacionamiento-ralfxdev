@@ -26,3 +26,13 @@ export function postData(path, data) {
     body: JSON.stringify(data),
   }).then((res) => res.json());
 }
+
+export function deleteData(path) {
+  return fetch(API + path, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+  });
+}
