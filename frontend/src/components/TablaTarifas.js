@@ -6,9 +6,6 @@ import { Context } from "../context/Context";
 /* Services */
 import { getData, deleteData } from "../services/Api";
 
-/* Componets */
-import ModalBorrarTarifas from "../components/ModalBorrarTarifas";
-
 const TablaTarifas = () => {
   const [tarifas, setTarifas] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
