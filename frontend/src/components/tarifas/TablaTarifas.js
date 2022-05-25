@@ -31,9 +31,15 @@ const TablaTarifas = () => {
       });
   };
 
-  const handleDelete = (id) => {
-    deleteData(`tarifas/${id}/`);
-    setOnChange((prevState) => !prevState);
+  const handleDelete = () => {
+    deleteData(`tarifas/${id}`)
+      .then(() => {
+        setOnChange(!onChange);
+        getTarifas();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const handleEdit = (id) => {
@@ -232,6 +238,7 @@ const TablaTarifas = () => {
                               className="btn btn-danger"
                               data-bs-toggle="modal"
                               data-bs-target="#modal-eliminar-tarifa"
+                              onClick={() => handleEdit(tarifa.id)}
                             >
                               Borrar
                             </button>
@@ -257,12 +264,6 @@ const TablaTarifas = () => {
                                       </strong>{" "}
                                       la tarifa?
                                     </h5>
-                                    <button
-                                      type="button"
-                                      className="btn-close"
-                                      data-bs-dismiss="modal"
-                                      aria-label="Close"
-                                    ></button>
                                   </div>
                                   <div className="modal-body">
                                     Todos los datos serán eliminados.
@@ -279,10 +280,7 @@ const TablaTarifas = () => {
                                       type="button"
                                       className="btn btn-danger"
                                       data-bs-dismiss="modal"
-                                      onClick={handleDelete.bind(
-                                        this,
-                                        tarifa.id
-                                      )}
+                                      onClick={handleDelete}
                                     >
                                       Borrar
                                     </button>
