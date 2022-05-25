@@ -29,7 +29,7 @@ const Register = (props) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    postData("register", {
+    postData("usuarios/register", {
       name,
       username,
       email,

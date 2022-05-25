@@ -33,7 +33,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    getData("user").then((data) => {
+    getData("usuarios/user").then((data) => {
       if (data.name) {
         this.setState({ name: data.name });
         this.setState({ is_superuser: data.is_superuser });

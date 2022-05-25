@@ -2,7 +2,7 @@
 import { postData } from "../services/Api";
 
 const Logout = async () => {
-    await postData("logout");
+    await postData("usuarios/logout");
     window.location.reload();
 };
 

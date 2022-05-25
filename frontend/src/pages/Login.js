@@ -23,7 +23,7 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    postData("login", {
+    postData("usuarios/login", {
       email,
       password,
     }).then((data) => {
