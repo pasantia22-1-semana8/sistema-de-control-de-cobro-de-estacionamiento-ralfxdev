@@ -10,6 +10,7 @@ import Nav from "./components/Nav";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
+import Clientes from "./pages/Clientes";
 import NotFound from "./pages/NotFound";
 import AjustesGenerales from "./pages/AjustesGenerales";
 import AjustesCuenta from "./pages/AjustesCuenta";
@@ -49,6 +50,7 @@ class App extends Component {
           <div className="main">
             <Routes>
               <Route path="/" element={<Dashboard name={this.state.name} />} />
+              <Route path="/clientes" element={<Clientes />} />
               <Route
                 path="/ajustes/generales"
                 element={
@@ -98,6 +100,7 @@ class App extends Component {
           <div className="main">
             <Routes>
               <Route path="/" element={<Dashboard name={this.state.name} />} />
+              <Route path="/clientes" element={<Clientes />} />
               <Route path="*" element={<NotFound />} />
               <Route
                 path="ajustes/cuenta"
