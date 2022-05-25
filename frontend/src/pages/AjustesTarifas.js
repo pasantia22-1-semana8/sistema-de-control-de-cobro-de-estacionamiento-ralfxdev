@@ -3,7 +3,7 @@ import React from "react";
 /* Componets */
 import Ajustes from "../components/Ajustes";
 import TablaTarifas from "../components/TablaTarifas";
-import ModalCrearTarifas from "../components/ModalCrearTarifas";
+import ModalCrearTarifas from "../components/tarifas/ModalCrearTarifas";
 
 const AjustesTarifas = (props) => {
   return (

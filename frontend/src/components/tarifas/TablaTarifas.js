@@ -70,12 +70,6 @@ const TablaTarifas = () => {
                           <td>{tarifa.descripcion}</td>
                           <td>
                             <button className="btn btn-dark">Editar</button>
-                            <button
-                              className="btn btn-danger"
-                              onClick={() => handleDelete(tarifa.id)}
-                            >
-                              Borrar
-                            </button>
                           </td>
                         </tr>
                       ))

@@ -1,10 +1,10 @@
 import React from "react";
 
 /* Context */
-import { Context } from "../context/Context";
+import { Context } from "../../context/Context";
 
 /* Services */
-import { postData } from "../services/Api";
+import { postData } from "../../services/Api";
 
 const ModalCrearTarifas = () => {
   const [nombre, setNombre] = React.useState("");
