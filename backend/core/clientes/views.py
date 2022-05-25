@@ -16,13 +16,14 @@ class ClienteViewSet(viewsets.ModelViewSet):
     queryset = Cliente.objects.all()
     serializer_class = ClienteSerializer
 
+
     def create(self, request, *args, **kwargs):
         cliente = Cliente(
             nombre_completo = request.data['nombre_completo'],
             telefono = request.data['telefono'],
             direccion = request.data['direccion'],
         )
-        tarifa = Tarifa.objects.get(id=request.data['tarifa'])
+        tarifa = Tarifa.objects.get(id=request.data['tarifa_id'])
         cliente.tarifa = tarifa
         cliente.save()
         return Response({'detail': 'Cliente creado'}, status=201)

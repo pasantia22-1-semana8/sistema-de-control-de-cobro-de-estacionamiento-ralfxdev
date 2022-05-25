@@ -4,6 +4,7 @@
 from django.db import models
 from tarifas.models import Tarifa
 
+
 class Cliente(models.Model):
     """Modelo de Cliente"""
     nombre_completo = models.CharField(max_length=255)
