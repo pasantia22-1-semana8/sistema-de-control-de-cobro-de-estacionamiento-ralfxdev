@@ -9,9 +9,11 @@ import { postData } from "../services/Api";
 import "./styles/FormUser.css";
 
 const Login = () => {
-  /* Hooks que permiten usar el estado en componentes funcionales. */
+  /* Datos del usuario. */
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+
+  /* Utils */
   const [navigate, setNavigate] = React.useState(false);
   const [error, setError] = React.useState("");
 
@@ -23,7 +25,7 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    postData("login", {
+    postData("usuarios/login", {
       email,
       password,
     }).then((data) => {
@@ -85,7 +87,7 @@ const Login = () => {
             <label>Contraseña</label>
           </div>
           <button className="w-100 btn btn-lg btn-dark" type="submit">
-            Login
+            Entrar
           </button>
         </form>
       </div>

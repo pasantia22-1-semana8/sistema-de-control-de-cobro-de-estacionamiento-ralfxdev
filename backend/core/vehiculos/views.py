@@ -3,8 +3,10 @@
 # Django
 from django.shortcuts import render
 from clientes.serializers import ClienteSerializer
-from .serializers import VehiculoSerializer
 from clientes.models import Cliente
+from tarifas.serializers import TarifaSerializer
+from tarifas.models import Tarifa
+from .serializers import VehiculoSerializer
 from .models import Vehiculo
 
 # Django Rest Framework
@@ -24,6 +26,8 @@ class VehiculoViewSet(viewsets.ModelViewSet):
             color = request.data['color'],
             cliente = Cliente.objects.get(id=request.data['cliente_id'])
         )
+        tarifa = Tarifa.objects.get(id=request.data['tarifa_id'])
+        vehiculo.tarifa = tarifa
         vehiculo.save()
         return Response({'detail': 'Vehiculo creado'}, status=201)
 
@@ -39,5 +43,7 @@ class VehiculoViewSet(viewsets.ModelViewSet):
         vehiculo.modelo = request.data['modelo']
         vehiculo.color = request.data['color']
         vehiculo.cliente = Cliente.objects.get(id=request.data['cliente_id'])
+        tarifa = Tarifa.objects.get(id=request.data['tarifa_id'])
+        vehiculo.tarifa = tarifa
         vehiculo.save()
         return Response({'detail': 'Vehiculo actualizado'}, status=200)

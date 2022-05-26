@@ -1,28 +1,28 @@
 import React from "react";
 
 /* Componets */
-import TablaClientes from "../components/clientes/TablaClientes";
-import ModalCrearClientes from "../components/clientes/ModalCrearClientes";
+import TablaVehiculos from "../components/vehiculos/TablaVehiculos";
+import ModalCrearVehiculos from "../components/vehiculos/ModalCrearVehiculos";
 
-const Clientes = () => {
+const Vehiculos = () => {
   return (
     <React.Fragment>
       <div className="container">
         <div className="row">
           <div className="col-md-12">
             <h1 className="text-center">
-              <span className="text-danger">MÓDULO</span> CLIENTES
+              <span className="text-danger">MÓDULO</span> VEHÍCULOS
             </h1>
           </div>
         </div>
         <div className="row">
           <div className="col-md-12">
-            <ModalCrearClientes />
+            <ModalCrearVehiculos />
           </div>
         </div>
         <div className="row">
           <div className="col-md-12">
-            <TablaClientes />
+            <TablaVehiculos />
           </div>
         </div>
       </div>
@@ -30,4 +30,4 @@ const Clientes = () => {
   );
 };
 
-export default Clientes;
+export default Vehiculos;

@@ -6,13 +6,22 @@ import { Context } from "../../context/Context";
 /* Services */
 import { getData, deleteData, putData } from "../../services/Api";
 
-const TablaTarifas = () => {
+const TablaVehiculos = () => {
+  /* Datos de los vehiculos */
+  const [vehiculos, setVehiculos] = React.useState([]);
+  const [id, setId] = React.useState("");
+  const [placa, setPlaca] = React.useState("");
+  const [marca, setMarca] = React.useState("");
+  const [modelo, setModelo] = React.useState("");
+  const [color, setColor] = React.useState("");
+
+  /* Datos del cliente */
+  const [clientes, setClientes] = React.useState([]);
+  const [cliente_id, setCliente_id] = React.useState("");
+
   /* Datos de la tarifa */
   const [tarifas, setTarifas] = React.useState([]);
-  const [id, setId] = React.useState("");
-  const [nombre, setNombre] = React.useState("");
-  const [precio, setPrecio] = React.useState("");
-  const [descripcion, setDescripcion] = React.useState("");
+  const [tarifa_id, setTarifa_id] = React.useState("");
 
   /* Utils */
   const [loading, setLoading] = React.useState(true);
@@ -35,11 +44,33 @@ const TablaTarifas = () => {
       });
   };
 
+  const getClientes = () => {
+    getData("clientes/")
+      .then((data) => {
+        setClientes(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const getVehiculos = () => {
+    getData("vehiculos/")
+      .then((data) => {
+        setVehiculos(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const handleDelete = () => {
-    deleteData(`tarifas/${id}`)
+    deleteData(`vehiculos/${id}`)
       .then(() => {
         setOnChange(!onChange);
-        getTarifas();
+        getVehiculos();
       })
       .catch((error) => {
         console.log(error);
@@ -47,12 +78,17 @@ const TablaTarifas = () => {
   };
 
   const handleEdit = (id) => {
-    getData(`tarifas/${id}/`)
+    getData(`vehiculos/${id}/`)
       .then((data) => {
-        setNombre(data.nombre);
-        setPrecio(data.precio);
-        setDescripcion(data.descripcion);
         setId(data.id);
+        setPlaca(data.placa);
+        setMarca(data.marca);
+        setModelo(data.modelo);
+        setColor(data.color);
+        setCliente_id(data.cliente_id);
+        setTarifa_id(data.tarifa_id);
+        getClientes();
+        getTarifas();
       })
       .catch((error) => {
         console.log(error);
@@ -61,12 +97,15 @@ const TablaTarifas = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    tarifas.map((tarifa) => {
-      if (tarifa.id === id) {
-        putData(`tarifas/${id}/`, {
-          nombre,
-          precio,
-          descripcion,
+    vehiculos.map((vehiculo) => {
+      if (vehiculo.id === id) {
+        putData(`vehiculos/${id}/`, {
+          placa,
+          marca,
+          modelo,
+          color,
+          cliente_id,
+          tarifa_id,
         })
           .then((data) => {
             setDetail(data.detail);
@@ -76,19 +115,18 @@ const TablaTarifas = () => {
           .catch((error) => {
             console.log(error);
             setShowError(true);
-            setError("Error al editar la tarifa");
+            setError("Error al editar el vehículo");
           });
       }
     });
   };
-
   const handleClose = () => {
     setShowDetail(false);
     setShowError(false);
   };
 
   React.useEffect(() => {
-    getTarifas();
+    getVehiculos();
   }, [onChange]);
 
   return (
@@ -97,7 +135,7 @@ const TablaTarifas = () => {
         <div className="col-md-12">
           <div className="card">
             <div className="card-header">
-              <h4>Tarifas Disponibles</h4>
+              <h4>Listado de Vehículos</h4>
             </div>
             <div className="card-body">
               <div className="table-responsive">
@@ -105,16 +143,20 @@ const TablaTarifas = () => {
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th>Nombre</th>
+                      <th>Placa</th>
+                      <th>Marca</th>
+                      <th>Modelo</th>
+                      <th>Color</th>
+                      <th>Cliente</th>
+                      <th>Tarifa</th>
                       <th>Precio</th>
-                      <th>Descripción</th>
                       <th>Acciones</th>
                     </tr>
                   </thead>
                   <tbody>
                     {loading ? (
                       <tr>
-                        <td colSpan="5" className="text-center">
+                        <td colSpan="9" className="text-center">
                           <div
                             className="spinner-border text-dark"
                             role="status"
@@ -123,25 +165,29 @@ const TablaTarifas = () => {
                         </td>
                       </tr>
                     ) : (
-                      tarifas.map((tarifa, index) => (
+                      vehiculos.map((vehiculo, index) => (
                         <tr key={index}>
                           <td>{index + 1}</td>
-                          <td>{tarifa.nombre}</td>
-                          <td>{tarifa.precio}</td>
-                          <td>{tarifa.descripcion}</td>
+                          <td>{vehiculo.placa}</td>
+                          <td>{vehiculo.marca}</td>
+                          <td>{vehiculo.modelo}</td>
+                          <td>{vehiculo.color}</td>
+                          <td>{vehiculo.cliente.nombre_completo}</td>
+                          <td>{vehiculo.tarifa.nombre}</td>
+                          <td>{vehiculo.tarifa.precio}</td>
                           <td>
                             <button
                               type="button"
                               className="btn btn-dark"
                               data-bs-toggle="modal"
-                              data-bs-target="#modal-editar-tarifa"
-                              onClick={() => handleEdit(tarifa.id)}
+                              data-bs-target="#modal-editar-vehiculo"
+                              onClick={() => handleEdit(vehiculo.id)}
                             >
                               <i class="bi bi-pencil-square"></i>
                             </button>
                             <div
                               className="modal fade hide.bs.modal"
-                              id="modal-editar-tarifa"
+                              id="modal-editar-vehiculo"
                               data-bs-backdrop="static"
                               data-bs-keyboard="false"
                               aria-labelledby="staticBackdropLabel"
@@ -154,7 +200,7 @@ const TablaTarifas = () => {
                                       className="modal-title"
                                       id="staticBackdropLabel"
                                     >
-                                      Editar Tarifa
+                                      Editar Vehículo
                                     </h5>
                                   </div>
                                   <div className="modal-body">
@@ -183,38 +229,92 @@ const TablaTarifas = () => {
                                             className="form-control"
                                             id="floatingInput"
                                             required
-                                            value={nombre}
+                                            value={placa}
                                             onChange={(e) =>
-                                              setNombre(e.target.value)
+                                              setPlaca(e.target.value)
                                             }
                                           />
-                                          <label>Nombre</label>
+                                          <label>Placa</label>
                                         </div>
                                         <div className="form-floating">
                                           <input
-                                            type="number"
-                                            className="form-control"
-                                            id="floatingInput"
-                                            required
-                                            value={precio}
-                                            onChange={(e) =>
-                                              setPrecio(e.target.value)
-                                            }
-                                          />
-                                          <label>Precio</label>
-                                        </div>
-                                        <div className="form-floating">
-                                          <textarea
                                             type="text"
                                             className="form-control"
                                             id="floatingInput"
                                             required
-                                            value={descripcion}
+                                            value={marca}
                                             onChange={(e) =>
-                                              setDescripcion(e.target.value)
+                                              setMarca(e.target.value)
                                             }
                                           />
-                                          <label>Descripción</label>
+                                          <label>Marca</label>
+                                        </div>
+
+                                        <div className="form-floating">
+                                          <input
+                                            type="text"
+                                            className="form-control"
+                                            id="floatingInput"
+                                            required
+                                            value={modelo}
+                                            onChange={(e) =>
+                                              setModelo(e.target.value)
+                                            }
+                                          />
+                                          <label>Modelo</label>
+                                        </div>
+
+                                        <div className="form-floating">
+                                          <select
+                                            className="form-select"
+                                            id="floatingSelect"
+                                            aria-label="Floating label select example"
+                                            required
+                                            onChange={(e) =>
+                                              setCliente_id(e.target.value)
+                                            }
+                                          >
+                                            <option value="">
+                                              Seleccione un cliente
+                                            </option>
+                                            {clientes.map((cliente) => (
+                                              <option
+                                                key={cliente.id}
+                                                value={cliente.id}
+                                              >
+                                                {cliente.nombre_completo}
+                                              </option>
+                                            ))}
+                                          </select>
+                                          <label for="floatingSelect">
+                                            Clientes
+                                          </label>
+                                        </div>
+                                        <div className="form-floating">
+                                          <select
+                                            className="form-select"
+                                            id="floatingSelect"
+                                            aria-label="Floating label select example"
+                                            required
+                                            onChange={(e) =>
+                                              setTarifa_id(e.target.value)
+                                            }
+                                          >
+                                            <option value="">
+                                              Seleccione una tarifa
+                                            </option>
+                                            {tarifas.map((tarifa) => (
+                                              <option
+                                                key={tarifa.id}
+                                                value={tarifa.id}
+                                              >
+                                                {tarifa.nombre}
+                                              </option>
+                                            ))}
+                                          </select>
+                                          <label for="floatingSelect">
+                                            Tarifas
+                                          </label>
                                         </div>
                                       </div>
                                       <div className="modal-footer">
@@ -243,15 +343,15 @@ const TablaTarifas = () => {
                               type="button"
                               className="btn btn-danger"
                               data-bs-toggle="modal"
-                              data-bs-target="#modal-eliminar-tarifa"
-                              onClick={() => handleEdit(tarifa.id)}
+                              data-bs-target="#modal-eliminar-vehiculo"
+                              onClick={() => handleEdit(vehiculo.id)}
                             >
                               <i class="bi bi-trash-fill"></i>
                             </button>
 
                             <div
                               className="modal fade"
-                              id="modal-eliminar-tarifa"
+                              id="modal-eliminar-vehiculo"
                               data-bs-backdrop="static"
                               data-bs-keyboard="false"
                               aria-labelledby="staticBackdropLabel"
@@ -268,7 +368,7 @@ const TablaTarifas = () => {
                                       <strong className="text-danger">
                                         Borrar
                                       </strong>{" "}
-                                      la tarifa?
+                                      el cliente?
                                     </h5>
                                   </div>
                                   <div className="modal-body">
@@ -298,11 +398,9 @@ const TablaTarifas = () => {
                         </tr>
                       ))
                     )}
-                    {!loading && tarifas.length === 0 && (
+                    {!loading && vehiculos.length === 0 && (
                       <tr>
-                        <td colSpan="5" className="text-center">
-                          No hay tarifas disponibles
-                        </td>
+                        <td colSpan="8">No hay vehículos registrados</td>
                       </tr>
                     )}
                   </tbody>
@@ -316,4 +414,4 @@ const TablaTarifas = () => {
   );
 };
 
-export default TablaTarifas;
+export default TablaVehiculos;

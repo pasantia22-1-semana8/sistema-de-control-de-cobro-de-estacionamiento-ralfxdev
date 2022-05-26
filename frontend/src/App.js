@@ -9,11 +9,16 @@ import Nav from "./components/Nav";
 /* Pages */
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Dashboard from "./pages/Dashboard";
+import Inicio from "./pages/Inicio";
 import Clientes from "./pages/Clientes";
+import Vehiculos from "./pages/Vehiculos";
+import CobroResidentes from "./pages/CobroResidentes";
+import Caja from "./pages/Caja";
+import Reportes from "./pages/Reportes";
 import NotFound from "./pages/NotFound";
 import AjustesGenerales from "./pages/AjustesGenerales";
 import AjustesCuenta from "./pages/AjustesCuenta";
+import Usuarios from "./pages/Usuarios";
 import AjustesTarifas from "./pages/AjustesTarifas";
 
 /* Services */
@@ -22,7 +27,7 @@ import { getData } from "./services/Api";
 /* Styles */
 import "./App.css";
 
-/* Si el usuario ha iniciado sesión, muestrea el dashboard; de lo contrario, muestra la página de inicio de sesión */
+/* Si el usuario ha iniciado sesión, muestra el inicio; de lo contrario, muestra la página de inicio de sesión */
 class App extends Component {
   constructor(props) {
     super(props);
@@ -33,7 +38,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    getData("user").then((data) => {
+    getData("usuarios/user").then((data) => {
       if (data.name) {
         this.setState({ name: data.name });
         this.setState({ is_superuser: data.is_superuser });
@@ -49,8 +54,18 @@ class App extends Component {
           <Nav name={this.state.name} is_superuser={this.state.is_superuser} />
           <div className="main">
             <Routes>
-              <Route path="/" element={<Dashboard name={this.state.name} />} />
+              <Route path="/" element={<Inicio name={this.state.name} />} />
               <Route path="/clientes" element={<Clientes />} />
+              <Route path="/vehiculos" element={<Vehiculos />} />
+              <Route
+                path="/cobro-residentes"
+                element={<CobroResidentes name={this.state.name} />}
+              />
+              <Route path="/caja" element={<Caja name={this.state.name} />} />
+              <Route
+                path="/reportes"
+                element={<Reportes name={this.state.name} />}
+              />
               <Route
                 path="/ajustes/generales"
                 element={
@@ -64,6 +79,15 @@ class App extends Component {
                 path="ajustes/cuenta"
                 element={
                   <AjustesCuenta
+                    name={this.state.name}
+                    is_superuser={this.state.is_superuser}
+                  />
+                }
+              />
+              <Route
+                path="/ajustes/usuarios"
+                element={
+                  <Usuarios
                     name={this.state.name}
                     is_superuser={this.state.is_superuser}
                   />
@@ -99,8 +123,14 @@ class App extends Component {
           <Nav name={this.state.name} is_superuser={this.state.is_superuser} />
           <div className="main">
             <Routes>
-              <Route path="/" element={<Dashboard name={this.state.name} />} />
+              <Route path="/" element={<Inicio name={this.state.name} />} />
               <Route path="/clientes" element={<Clientes />} />
+              <Route path="/vehiculos" element={<Vehiculos />} />
+              <Route
+                path="/cobro-residentes"
+                element={<CobroResidentes name={this.state.name} />}
+              />
+              <Route path="/caja" element={<Caja name={this.state.name} />} />
               <Route path="*" element={<NotFound />} />
               <Route
                 path="ajustes/cuenta"

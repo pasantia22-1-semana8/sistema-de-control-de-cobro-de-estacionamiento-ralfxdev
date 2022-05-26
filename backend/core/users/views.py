@@ -8,6 +8,7 @@ from .models import User
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.exceptions import AuthenticationFailed
+from rest_framework import viewsets
 
 # Utils
 import jwt
@@ -104,6 +105,7 @@ Esta clase es una subclase de APIView y tiene un método de publicación que eli
 la cookie jwt y devuelve una respuesta con un mensaje.
 """
 
+
 class LogoutView(APIView):
     def post(self, request):
         response = Response()
@@ -112,3 +114,23 @@ class LogoutView(APIView):
             'message': 'éxito'
         }
         return response
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+    def destroy(self, request, *args, **kwargs):
+        user = self.get_object()
+        user.delete()
+        return Response({'detail': 'Usuario eliminado'}, status=204)
+
+    def update(self, request, *args, **kwargs):
+        user = self.get_object()
+        user.name = request.data['name']
+        user.username = request.data['username']
+        user.email = request.data['email']
+        user.password = request.data['password']
+        user.is_superuser = request.data['is_superuser']
+        user.save()
+        return Response({'detail': 'Tarifa actualizada'}, status=200)

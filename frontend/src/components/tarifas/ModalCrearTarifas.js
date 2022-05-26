@@ -7,13 +7,18 @@ import { Context } from "../../context/Context";
 import { postData } from "../../services/Api";
 
 const ModalCrearTarifas = () => {
+  /* Datos de la tarifa */
   const [nombre, setNombre] = React.useState("");
   const [precio, setPrecio] = React.useState("");
   const [descripcion, setDescripcion] = React.useState("");
+
+  /* Utils */
   const [detail, setDetail] = React.useState("");
   const [showDetail, setShowDetail] = React.useState(true);
   const [error, setError] = React.useState("");
   const [showError, setShowError] = React.useState(true);
+
+  /* Context */
   const { setOnChange } = React.useContext(Context);
 
   const handleSubmit = (e) => {
@@ -22,15 +27,17 @@ const ModalCrearTarifas = () => {
       nombre,
       precio,
       descripcion,
-    }).then((data) => {
+    })
+      .then((data) => {
         setDetail(data.detail);
         setOnChange((prevState) => !prevState);
         setShowDetail(true);
-    }).catch((error) => {
-      console.log(error);
-      setShowError(true);
-      setError("Error al crear la tarifa");
-    });
+      })
+      .catch((error) => {
+        console.log(error);
+        setShowError(true);
+        setError("Error al crear la tarifa");
+      });
     document.getElementById("form").reset();
   };
 
@@ -68,18 +75,17 @@ const ModalCrearTarifas = () => {
               </div>
               <div className="modal-body">
                 <form id="form" onSubmit={handleSubmit}>
-                  
-                  { showError && error && (
+                  {showError && error && (
                     <div className="alert alert-danger" role="alert">
                       {error}
                     </div>
                   )}
-                  { showDetail && detail && (
+                  {showDetail && detail && (
                     <div className="alert alert-success" role="alert">
                       {detail}
                     </div>
                   )}
-                  
+
                   <div className="form-group">
                     <div className="form-floating">
                       <input

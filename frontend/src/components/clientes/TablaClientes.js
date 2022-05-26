@@ -7,34 +7,22 @@ import { Context } from "../../context/Context";
 import { getData, deleteData, putData } from "../../services/Api";
 
 const TablaClientes = () => {
+  /* Datos del cliente */
   const [clientes, setClientes] = React.useState([]);
-  const [loading, setLoading] = React.useState(true);
-
   const [id, setId] = React.useState("");
   const [nombreCompleto, setNombreCompleto] = React.useState("");
   const [telefono, setTelefono] = React.useState("");
   const [direccion, setDireccion] = React.useState("");
-  const [tarifa_id, setTarifa_id] = React.useState("");
 
+  /* Utils */
+  const [loading, setLoading] = React.useState(true);
   const [detail, setDetail] = React.useState("");
   const [showDetail, setShowDetail] = React.useState(true);
   const [error, setError] = React.useState("");
   const [showError, setShowError] = React.useState(true);
 
+  /* Context */
   const { onChange, setOnChange } = React.useContext(Context);
-
-  const [tarifas, setTarifas] = React.useState([]);
-
-  const getTarifas = () => {
-    getData("tarifas/")
-      .then((data) => {
-        setTarifas(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
 
   const getClientes = () => {
     getData("clientes/")
@@ -64,9 +52,7 @@ const TablaClientes = () => {
         setNombreCompleto(data.nombre_completo);
         setTelefono(data.telefono);
         setDireccion(data.direccion);
-        setTarifa_id(data.tarifa_id);
         setId(data.id);
-        getTarifas();
       })
       .catch((error) => {
         console.log(error);
@@ -81,7 +67,6 @@ const TablaClientes = () => {
           nombre_completo: nombreCompleto,
           telefono: telefono,
           direccion: direccion,
-          tarifa_id: tarifa_id,
         })
           .then((data) => {
             setDetail(data.detail);
@@ -122,15 +107,13 @@ const TablaClientes = () => {
                       <th>Nombre Completo</th>
                       <th>Teléfono</th>
                       <th>Dirección</th>
-                      <th>Tarifa</th>
-                      <th>Precio</th>
                       <th>Acciones</th>
                     </tr>
                   </thead>
                   <tbody>
                     {loading ? (
                       <tr>
-                        <td colSpan="7" className="text-center">
+                        <td colSpan="5" className="text-center">
                           <div
                             className="spinner-border text-dark"
                             role="status"
@@ -145,21 +128,19 @@ const TablaClientes = () => {
                           <td>{cliente.nombre_completo}</td>
                           <td>{cliente.telefono}</td>
                           <td>{cliente.direccion}</td>
-                          <td>{cliente.tarifa.nombre}</td>
-                          <td>{cliente.tarifa.precio}</td>
                           <td>
                             <button
                               type="button"
                               className="btn btn-dark"
                               data-bs-toggle="modal"
-                              data-bs-target="#modal-editar-tarifa"
+                              data-bs-target="#modal-editar-cliente"
                               onClick={() => handleEdit(cliente.id)}
                             >
-                              Editar
+                              <i class="bi bi-pencil-square"></i>
                             </button>
                             <div
                               className="modal fade hide.bs.modal"
-                              id="modal-editar-tarifa"
+                              id="modal-editar-cliente"
                               data-bs-backdrop="static"
                               data-bs-keyboard="false"
                               aria-labelledby="staticBackdropLabel"
@@ -236,29 +217,6 @@ const TablaClientes = () => {
                                           />
                                           <label>Dirección</label>
                                         </div>
-
-                                        <div className="form-group">
-                                          <select
-                                            className="form-control"
-                                            id="exampleFormControlSelect1"
-                                            required
-                                            onChange={(e) =>
-                                              setTarifa_id(e.target.value)
-                                            }
-                                          >
-                                            <option value="">
-                                              Seleccione una tarifa
-                                            </option>
-                                            {tarifas.map((tarifa) => (
-                                              <option
-                                                key={tarifa.id}
-                                                value={tarifa.id}
-                                              >
-                                                {tarifa.nombre}
-                                              </option>
-                                            ))}
-                                          </select>
-                                        </div>
                                       </div>
                                       <div className="modal-footer">
                                         <button
@@ -286,15 +244,15 @@ const TablaClientes = () => {
                               type="button"
                               className="btn btn-danger"
                               data-bs-toggle="modal"
-                              data-bs-target="#modal-eliminar-tarifa"
+                              data-bs-target="#modal-eliminar-cliente"
                               onClick={() => handleEdit(cliente.id)}
                             >
-                              Borrar
+                              <i class="bi bi-trash-fill"></i>
                             </button>
 
                             <div
                               className="modal fade"
-                              id="modal-eliminar-tarifa"
+                              id="modal-eliminar-cliente"
                               data-bs-backdrop="static"
                               data-bs-keyboard="false"
                               aria-labelledby="staticBackdropLabel"
@@ -343,7 +301,7 @@ const TablaClientes = () => {
                     )}
                     {!loading && clientes.length === 0 && (
                       <tr>
-                        <td colSpan="8">No hay clientes registrados</td>
+                        <td colSpan="5">No hay clientes registrados</td>
                       </tr>
                     )}
                   </tbody>
