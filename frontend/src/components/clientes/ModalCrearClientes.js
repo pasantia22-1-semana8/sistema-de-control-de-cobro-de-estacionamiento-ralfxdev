@@ -4,35 +4,22 @@ import React from "react";
 import { Context } from "../../context/Context";
 
 /* Services */
-import { postData, getData } from "../../services/Api";
+import { postData } from "../../services/Api";
 
 const ModalCrearClientes = () => {
+  /* Datos del cliente */
   const [nombreCompleto, setNombreCompleto] = React.useState("");
   const [telefono, setTelefono] = React.useState("");
   const [direccion, setDireccion] = React.useState("");
-  const [tarifa_id, setTarifa_id] = React.useState("");
 
+  /* Utils */
   const [detail, setDetail] = React.useState("");
   const [showDetail, setShowDetail] = React.useState(true);
   const [error, setError] = React.useState("");
   const [showError, setShowError] = React.useState(true);
+
+  /* Context */
   const { setOnChange } = React.useContext(Context);
-
-  const [tarifas, setTarifas] = React.useState([]);
-
-  const getTarifas = () => {
-    getData("tarifas/")
-      .then((data) => {
-        setTarifas(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const handleTarifas = () => {
-    getTarifas();
-  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -40,20 +27,19 @@ const ModalCrearClientes = () => {
       nombre_completo: nombreCompleto,
       telefono: telefono,
       direccion: direccion,
-      tarifa_id: tarifa_id,
-    }).then((data) => {
+    })
+      .then((data) => {
         setDetail(data.detail);
         setOnChange((prevState) => !prevState);
         setShowDetail(true);
-        console.log(data);
-    }).catch((error) => {
-      console.log(error);
-      setShowError(true);
-      setError("Error al crear el cliente");
-    });
+      })
+      .catch((error) => {
+        console.log(error);
+        setShowError(true);
+        setError("Error al crear el cliente");
+      });
     document.getElementById("form").reset();
   };
-
 
   const handleClose = () => {
     setShowDetail(false);
@@ -67,15 +53,14 @@ const ModalCrearClientes = () => {
           type="button"
           className="btn btn-dark"
           data-bs-toggle="modal"
-          data-bs-target="#modal-crear-tarifa"
-          onClick={handleTarifas}
+          data-bs-target="#modal-crear-cliente"
         >
           Nuevo Cliente
         </button>
 
         <div
           className="modal fade hide.bs.modal"
-          id="modal-crear-tarifa"
+          id="modal-crear-cliente"
           data-bs-backdrop="static"
           data-bs-keyboard="false"
           aria-labelledby="staticBackdropLabel"
@@ -134,22 +119,6 @@ const ModalCrearClientes = () => {
                       />
                       <label>Dirección</label>
                     </div>
-
-                    <div className="form-group">
-                      <select
-                        className="form-control"
-                        id="exampleFormControlSelect1"
-                        required
-                        onChange={(e) => setTarifa_id(e.target.value)}
-                      >
-                        <option value="">Seleccione una tarifa</option>
-                        {tarifas.map((tarifa) => (
-                          <option key={tarifa.id} value={tarifa.id}>
-                            {tarifa.nombre}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
                   </div>
                   <div className="modal-footer">
                     <button
@@ -161,7 +130,7 @@ const ModalCrearClientes = () => {
                       Cerrar
                     </button>
                     <button type="submit" className="btn btn-dark">
-                      Guardar
+                      Crear
                     </button>
                   </div>
                 </form>

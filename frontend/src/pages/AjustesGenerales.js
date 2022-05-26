@@ -7,10 +7,14 @@ import Ajustes from "../components/Ajustes";
 const AjustesGenerales = (props) => {
   return (
     <React.Fragment>
-    <Ajustes is_superuser={props.is_superuser} />
-      <div className="text-center">
-        <h1>Ajustes Generales</h1>
-        <h3>{"Welcome " + props.name}</h3>
+      <Ajustes is_superuser={props.is_superuser} />
+      <div className="content">
+        <div className="text-center">
+          <h1 className="text-center">
+            <span className="text-danger">AJUSTES</span> GENERALES
+          </h1>
+          <h3>{"Bienvenido " + props.name}</h3>
+        </div>
       </div>
     </React.Fragment>
   );

@@ -11,12 +11,14 @@ import { postData } from "../services/Api";
 import "./styles/FormUser.css";
 
 const Register = (props) => {
-  /* Hooks que permiten usar el estado en componentes funcionales. */
+  /* Datos del usuario */
   const [name, setName] = React.useState("");
   const [username, setUsername] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [is_superuser, setIsSuperuser] = React.useState(false);
+
+  /* Utils */
   const [mesage, setMesage] = React.useState("");
   const [error, setError] = React.useState("");
 
@@ -62,7 +64,9 @@ const Register = (props) => {
               <path d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z" />
               <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
             </svg>
-            <h1 className="h3 mb-3 fw-normal">Crear Usuario</h1>
+            <h1 className="text-center h2 mb-3">
+              <span className="text-danger">CREAR</span> USUARIO
+            </h1>
 
             {mesage && (
               <div className="alert alert-success" role="alert">

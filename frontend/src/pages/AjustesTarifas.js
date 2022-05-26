@@ -8,9 +8,11 @@ import ModalCrearTarifas from "../components/tarifas/ModalCrearTarifas";
 const AjustesTarifas = (props) => {
   return (
     <React.Fragment>
-      <Ajustes is_superuser={props.is_superuser}/>
+      <Ajustes is_superuser={props.is_superuser} />
       <div className="content">
-        <h1 className="text-center">Ajustes de Tarifas</h1>
+        <h1 className="text-center">
+          <span className="text-danger">MÓDULO</span> TARIFAS
+        </h1>
         <ModalCrearTarifas />
         <TablaTarifas />
       </div>

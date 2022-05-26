@@ -17,11 +17,11 @@ const Nav = (props) => {
         <ul className="navbar-nav me-auto mb-2 mb-md-0">
           <li className="nav-item">
             <Link className="nav-link" aria-current="page" to="/">
-              Dashboard
+              Inicio
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/">
+            <Link className="nav-link" to="/vehiculos">
               Vehículos
             </Link>
           </li>
@@ -31,17 +31,17 @@ const Nav = (props) => {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/">
+            <Link className="nav-link" to="/cobro-residentes">
               Cobro Residentes
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/">
+            <Link className="nav-link" to="/caja">
               Caja
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" aria-current="page" to="/">
+            <Link className="nav-link" aria-current="page" to="/reportes">
               Reportes
             </Link>
           </li>
@@ -76,11 +76,11 @@ const Nav = (props) => {
         <ul className="navbar-nav me-auto mb-2 mb-md-0">
           <li className="nav-item">
             <Link className="nav-link" aria-current="page" to="/">
-              Dashboard
+              Inicio
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/">
+            <Link className="nav-link" to="/vehiculos">
               Vehículos
             </Link>
           </li>
@@ -90,12 +90,12 @@ const Nav = (props) => {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/">
+            <Link className="nav-link" to="/cobro-residentes">
               Cobro Residentes
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/">
+            <Link className="nav-link" to="/caja">
               Caja
             </Link>
           </li>
@@ -178,7 +178,7 @@ const Nav = (props) => {
             <div className="modal-header">
               <h5 className="modal-title" id="staticBackdropLabel">
                 ¿Está seguro que deseas{" "}
-                <strong className="text-danger">cerrar sesión</strong>?
+                <strong className="text-danger">Cerrar Sesión</strong>?
               </h5>
             </div>
             <div className="modal-body">

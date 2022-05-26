@@ -25,9 +25,6 @@ const Ajustes = (props) => {
           <Link className="nav-link" to="/ajustes/tarifas">
             Tarifas
           </Link>
-          <Link className="nav-link" to="/">
-            Documentación
-          </Link>
         </div>
       </React.Fragment>
     );
@@ -37,9 +34,6 @@ const Ajustes = (props) => {
         <div className="sidebar">
           <Link className="nav-link" to="/ajustes/cuenta">
             Cuenta
-          </Link>
-          <Link className="nav-link" to="/">
-            Documentación
           </Link>
         </div>
       </React.Fragment>
