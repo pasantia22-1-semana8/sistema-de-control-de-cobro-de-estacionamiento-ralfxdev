@@ -1,10 +1,8 @@
-"""Views Clientes"""
+"""Views Clientes."""
 
 # Django
 from django.shortcuts import render
-from tarifas.serializers import TarifaSerializer
 from .serializers import ClienteSerializer
-from tarifas.models import Tarifa
 from .models import Cliente
 
 # Django Rest Framework
@@ -23,8 +21,6 @@ class ClienteViewSet(viewsets.ModelViewSet):
             telefono = request.data['telefono'],
             direccion = request.data['direccion'],
         )
-        tarifa = Tarifa.objects.get(id=request.data['tarifa_id'])
-        cliente.tarifa = tarifa
         cliente.save()
         return Response({'detail': 'Cliente creado'}, status=201)
 
@@ -38,7 +34,5 @@ class ClienteViewSet(viewsets.ModelViewSet):
         cliente.nombre_completo = request.data['nombre_completo']
         cliente.telefono = request.data['telefono']
         cliente.direccion = request.data['direccion']
-        tarifa = Tarifa.objects.get(id=request.data['tarifa_id'])
-        cliente.tarifa = tarifa
         cliente.save()
         return Response({'detail': 'Cliente actualizado'}, status=200)
