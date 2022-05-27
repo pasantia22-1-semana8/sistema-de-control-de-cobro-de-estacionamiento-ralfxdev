@@ -17,21 +17,25 @@ const Nav = (props) => {
         <ul className="navbar-nav me-auto mb-2 mb-md-0">
           <li className="nav-item">
             <Link className="nav-link" aria-current="page" to="/">
+              <i className="bi bi-house-fill me-2"></i>
               Inicio
             </Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link" to="/vehiculos">
+              <i className="bi bi-truck me-2"></i>
               Vehículos
             </Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link" to="/clientes">
+              <i className="bi bi-people-fill me-2"></i>
               Clientes
             </Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link" aria-current="page" to="/registros">
+              <i className="bi bi-stack me-2"></i>
               Registros
             </Link>
           </li>
@@ -39,11 +43,13 @@ const Nav = (props) => {
         <ul className="navbar-nav ml-auto">
           <li className="nav-item">
             <Link className="nav-link" to="/ajustes/cuenta">
+              <i className="bi bi-person-fill me-2"></i>
               {props.name}
             </Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link" to="/ajustes/generales">
+              <i className="bi bi-sliders me-2"></i>
               Ajustes
             </Link>
           </li>
@@ -66,21 +72,25 @@ const Nav = (props) => {
         <ul className="navbar-nav me-auto mb-2 mb-md-0">
           <li className="nav-item">
             <Link className="nav-link" aria-current="page" to="/">
+              <i className="bi bi-house-fill me-2"></i>
               Inicio
             </Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link" to="/vehiculos">
+              <i className="bi bi-truck me-2"></i>
               Vehículos
             </Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link" to="/clientes">
+              <i className="bi bi-people-fill me-2"></i>
               Clientes
             </Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link" aria-current="page" to="/registros">
+              <i className="bi bi-stack me-2"></i>
               Registros
             </Link>
           </li>
@@ -88,6 +98,7 @@ const Nav = (props) => {
         <ul className="navbar-nav ml-auto">
           <li className="nav-item">
             <Link className="nav-link" to="/ajustes/cuenta">
+              <i className="bi bi-person-fill me-2"></i>
               {props.name}
             </Link>
           </li>
@@ -110,6 +121,7 @@ const Nav = (props) => {
         <ul className="navbar-nav me-auto mb-2 mb-md-0">
           <li className="nav-item">
             <Link className="nav-link" to="/">
+              <i className="bi bi-file-earmark-text-fill me-2"></i>
               Documentación
             </Link>
           </li>
@@ -132,6 +144,7 @@ const Nav = (props) => {
       <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div className="container-fluid p-2">
           <Link className="navbar-brand" to="/">
+            <i className="bi bi-stoplights-fill me-2"></i>
             PARKING-APP
           </Link>
           <button
