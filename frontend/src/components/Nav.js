@@ -31,18 +31,8 @@ const Nav = (props) => {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/cobro-residentes">
-              Cobro Residentes
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/caja">
-              Caja
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" aria-current="page" to="/reportes">
-              Reportes
+            <Link className="nav-link" aria-current="page" to="/registros">
+              Registros
             </Link>
           </li>
         </ul>
@@ -90,13 +80,8 @@ const Nav = (props) => {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/cobro-residentes">
-              Cobro Residentes
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/caja">
-              Caja
+            <Link className="nav-link" aria-current="page" to="/registros">
+              Registros
             </Link>
           </li>
         </ul>

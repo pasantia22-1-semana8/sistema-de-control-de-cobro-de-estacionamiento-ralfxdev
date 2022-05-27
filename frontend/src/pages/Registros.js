@@ -1,12 +1,12 @@
 /* React */
 import React from "react";
 
-const Caja = (props) => {
+const Reportes = (props) => {
   return (
     <React.Fragment>
       <div className="text-center">
         <h1 className="text-center">
-          <span className="text-danger">MÓDULO</span> CAJA
+          <span className="text-danger">MÓDULO</span> REGISTROS
         </h1>
         <h3>{"Bienvenido " + props.name}</h3>
       </div>
@@ -14,4 +14,4 @@ const Caja = (props) => {
   );
 };
 
-export default Caja;
+export default Reportes;
