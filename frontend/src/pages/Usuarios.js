@@ -12,7 +12,7 @@ const Usuarios = (props) => {
           <h1 className="text-center">
             <span className="text-danger">MÓDULO</span> USUARIOS
           </h1>
-          <h3>{"Bienvenido " + props.name}</h3>
+          <h2>Próximamente...</h2>
         </div>
       </div>
     </React.Fragment>

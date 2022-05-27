@@ -12,9 +12,7 @@ import Register from "./pages/Register";
 import Inicio from "./pages/Inicio";
 import Clientes from "./pages/Clientes";
 import Vehiculos from "./pages/Vehiculos";
-import CobroResidentes from "./pages/CobroResidentes";
-import Caja from "./pages/Caja";
-import Reportes from "./pages/Reportes";
+import Registros from "./pages/Registros";
 import NotFound from "./pages/NotFound";
 import AjustesGenerales from "./pages/AjustesGenerales";
 import AjustesCuenta from "./pages/AjustesCuenta";
@@ -58,13 +56,8 @@ class App extends Component {
               <Route path="/clientes" element={<Clientes />} />
               <Route path="/vehiculos" element={<Vehiculos />} />
               <Route
-                path="/cobro-residentes"
-                element={<CobroResidentes name={this.state.name} />}
-              />
-              <Route path="/caja" element={<Caja name={this.state.name} />} />
-              <Route
-                path="/reportes"
-                element={<Reportes name={this.state.name} />}
+                path="/registros"
+                element={<Registros name={this.state.name} />}
               />
               <Route
                 path="/ajustes/generales"
@@ -127,10 +120,9 @@ class App extends Component {
               <Route path="/clientes" element={<Clientes />} />
               <Route path="/vehiculos" element={<Vehiculos />} />
               <Route
-                path="/cobro-residentes"
-                element={<CobroResidentes name={this.state.name} />}
+                path="/registros"
+                element={<Registros name={this.state.name} />}
               />
-              <Route path="/caja" element={<Caja name={this.state.name} />} />
               <Route path="*" element={<NotFound />} />
               <Route
                 path="ajustes/cuenta"
