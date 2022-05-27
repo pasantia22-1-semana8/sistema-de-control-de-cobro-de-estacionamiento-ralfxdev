@@ -400,7 +400,7 @@ const TablaVehiculos = () => {
                     )}
                     {!loading && vehiculos.length === 0 && (
                       <tr>
-                        <td colSpan="8">No hay vehículos registrados</td>
+                        <td colSpan="9">No hay vehículos registrados</td>
                       </tr>
                     )}
                   </tbody>
