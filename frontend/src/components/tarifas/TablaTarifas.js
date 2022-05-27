@@ -61,9 +61,9 @@ const TablaTarifas = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    tarifas.map((tarifa) => {
+    tarifas.map(async (tarifa) => {
       if (tarifa.id === id) {
-        putData(`tarifas/${id}/`, {
+        await putData(`tarifas/${id}/`, {
           nombre,
           precio,
           descripcion,
@@ -137,7 +137,7 @@ const TablaTarifas = () => {
                               data-bs-target="#modal-editar-tarifa"
                               onClick={() => handleEdit(tarifa.id)}
                             >
-                              <i class="bi bi-pencil-square"></i>
+                              <i className="bi bi-pencil-square"></i>
                             </button>
                             <div
                               className="modal fade hide.bs.modal"
@@ -193,6 +193,7 @@ const TablaTarifas = () => {
                                         <div className="form-floating">
                                           <input
                                             type="number"
+                                            step="any"
                                             className="form-control"
                                             id="floatingInput"
                                             required
@@ -246,7 +247,7 @@ const TablaTarifas = () => {
                               data-bs-target="#modal-eliminar-tarifa"
                               onClick={() => handleEdit(tarifa.id)}
                             >
-                              <i class="bi bi-trash-fill"></i>
+                              <i className="bi bi-trash-fill"></i>
                             </button>
 
                             <div

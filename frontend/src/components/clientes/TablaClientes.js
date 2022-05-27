@@ -61,9 +61,9 @@ const TablaClientes = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    clientes.map((cliente) => {
+    clientes.map(async (cliente) => {
       if (cliente.id === id) {
-        putData(`clientes/${id}/`, {
+        await putData(`clientes/${id}/`, {
           nombre_completo: nombreCompleto,
           telefono: telefono,
           direccion: direccion,
@@ -136,7 +136,7 @@ const TablaClientes = () => {
                               data-bs-target="#modal-editar-cliente"
                               onClick={() => handleEdit(cliente.id)}
                             >
-                              <i class="bi bi-pencil-square"></i>
+                              <i className="bi bi-pencil-square"></i>
                             </button>
                             <div
                               className="modal fade hide.bs.modal"
@@ -247,7 +247,7 @@ const TablaClientes = () => {
                               data-bs-target="#modal-eliminar-cliente"
                               onClick={() => handleEdit(cliente.id)}
                             >
-                              <i class="bi bi-trash-fill"></i>
+                              <i className="bi bi-trash-fill"></i>
                             </button>
 
                             <div

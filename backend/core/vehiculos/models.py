@@ -13,6 +13,7 @@ class Vehiculo(models.Model):
     color = models.CharField(max_length=255)
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     tarifa = models.ForeignKey(Tarifa, on_delete=models.CASCADE)
+    vehiculo_status = models.BooleanField(default=True)
 
     def __str__(self):
         return self.placa

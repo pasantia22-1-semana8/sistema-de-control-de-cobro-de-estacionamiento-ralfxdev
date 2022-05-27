@@ -24,6 +24,7 @@ class VehiculoViewSet(viewsets.ModelViewSet):
             marca = request.data['marca'],
             modelo = request.data['modelo'],
             color = request.data['color'],
+            vehiculo_status = True,
             cliente = Cliente.objects.get(id=request.data['cliente_id'])
         )
         tarifa = Tarifa.objects.get(id=request.data['tarifa_id'])
@@ -42,6 +43,7 @@ class VehiculoViewSet(viewsets.ModelViewSet):
         vehiculo.marca = request.data['marca']
         vehiculo.modelo = request.data['modelo']
         vehiculo.color = request.data['color']
+        vehiculo.vehiculo_status = request.data['vehiculo_status']
         vehiculo.cliente = Cliente.objects.get(id=request.data['cliente_id'])
         tarifa = Tarifa.objects.get(id=request.data['tarifa_id'])
         vehiculo.tarifa = tarifa
