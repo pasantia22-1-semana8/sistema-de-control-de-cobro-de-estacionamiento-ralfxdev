@@ -13,7 +13,7 @@ const AjustesCuenta = (props) => {
           <h1 className="text-center">
             <span className="text-danger">AJUSTES</span> CUENTA
           </h1>
-          <h3>{"Bienvenido " + props.name}</h3>
+          <h2>Próximamente...</h2>
         </div>
       </div>
     </React.Fragment>
