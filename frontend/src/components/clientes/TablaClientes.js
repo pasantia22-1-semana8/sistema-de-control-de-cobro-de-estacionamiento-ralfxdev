@@ -61,9 +61,9 @@ const TablaClientes = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    clientes.map((cliente) => {
+    clientes.map(async (cliente) => {
       if (cliente.id === id) {
-        putData(`clientes/${id}/`, {
+        await putData(`clientes/${id}/`, {
           nombre_completo: nombreCompleto,
           telefono: telefono,
           direccion: direccion,

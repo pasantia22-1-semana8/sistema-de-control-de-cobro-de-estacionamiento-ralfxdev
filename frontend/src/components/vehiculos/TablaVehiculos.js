@@ -97,9 +97,9 @@ const TablaVehiculos = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    vehiculos.map((vehiculo) => {
+    vehiculos.map(async (vehiculo) => {
       if (vehiculo.id === id) {
-        putData(`vehiculos/${id}/`, {
+        await putData(`vehiculos/${id}/`, {
           placa,
           marca,
           modelo,

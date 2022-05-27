@@ -61,9 +61,9 @@ const TablaTarifas = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    tarifas.map((tarifa) => {
+    tarifas.map(async (tarifa) => {
       if (tarifa.id === id) {
-        putData(`tarifas/${id}/`, {
+        await putData(`tarifas/${id}/`, {
           nombre,
           precio,
           descripcion,
