@@ -18,5 +18,5 @@ class VehiculoSerializer(serializers.ModelSerializer):
     tarifa_id = serializers.PrimaryKeyRelatedField(write_only=True, queryset=Tarifa.objects.all(), source='tarifa')
     class Meta:
         model = Vehiculo
-        fields = ('id', 'placa', 'marca', 'modelo', 'color', 'cliente', 'cliente_id', 'tarifa', 'tarifa_id')
+        fields = ('id', 'placa', 'marca', 'modelo', 'color', 'vehiculo_status', 'cliente', 'cliente_id', 'tarifa', 'tarifa_id')
         
