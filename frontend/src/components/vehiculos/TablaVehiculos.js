@@ -150,13 +150,14 @@ const TablaVehiculos = () => {
                       <th>Cliente</th>
                       <th>Tarifa</th>
                       <th>Precio</th>
+                      <th>Estado</th>
                       <th>Acciones</th>
                     </tr>
                   </thead>
                   <tbody>
                     {loading ? (
                       <tr>
-                        <td colSpan="9" className="text-center">
+                        <td colSpan="10" className="text-center">
                           <div
                             className="spinner-border text-dark"
                             role="status"
@@ -175,6 +176,19 @@ const TablaVehiculos = () => {
                           <td>{vehiculo.cliente.nombre_completo}</td>
                           <td>{vehiculo.tarifa.nombre}</td>
                           <td>{vehiculo.tarifa.precio}</td>
+                          {vehiculo.vehiculo_status === true ? (
+                            <td>
+                              <span className="badge bg-success">
+                                Disponible
+                              </span>
+                            </td>
+                          ) : (
+                            <td>
+                              <span className="badge bg-danger">
+                                Parqueado
+                              </span>
+                            </td>
+                          )}
                           <td>
                             <button
                               type="button"
@@ -183,7 +197,7 @@ const TablaVehiculos = () => {
                               data-bs-target="#modal-editar-vehiculo"
                               onClick={() => handleEdit(vehiculo.id)}
                             >
-                              <i class="bi bi-pencil-square"></i>
+                              <i className="bi bi-pencil-square"></i>
                             </button>
                             <div
                               className="modal fade hide.bs.modal"
@@ -286,9 +300,7 @@ const TablaVehiculos = () => {
                                               </option>
                                             ))}
                                           </select>
-                                          <label for="floatingSelect">
-                                            Clientes
-                                          </label>
+                                          <label>Clientes</label>
                                         </div>
                                         <div className="form-floating">
                                           <select
@@ -312,9 +324,7 @@ const TablaVehiculos = () => {
                                               </option>
                                             ))}
                                           </select>
-                                          <label for="floatingSelect">
-                                            Tarifas
-                                          </label>
+                                          <label>Tarifas</label>
                                         </div>
                                       </div>
                                       <div className="modal-footer">
@@ -346,7 +356,7 @@ const TablaVehiculos = () => {
                               data-bs-target="#modal-eliminar-vehiculo"
                               onClick={() => handleEdit(vehiculo.id)}
                             >
-                              <i class="bi bi-trash-fill"></i>
+                              <i className="bi bi-trash-fill"></i>
                             </button>
 
                             <div

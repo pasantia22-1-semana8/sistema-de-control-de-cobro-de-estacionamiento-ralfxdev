@@ -184,7 +184,7 @@ const ModalCrearVehiculos = () => {
                           </option>
                         ))}
                       </select>
-                      <label for="floatingSelect">Clientes</label>
+                      <label>Clientes</label>
                     </div>
                     <div className="form-floating">
                       <select
@@ -201,7 +201,7 @@ const ModalCrearVehiculos = () => {
                           </option>
                         ))}
                       </select>
-                      <label for="floatingSelect">Tarifas</label>
+                      <label>Tarifas</label>
                     </div>
                   </div>
                   <div className="modal-footer">
