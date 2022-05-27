@@ -136,7 +136,7 @@ const TablaClientes = () => {
                               data-bs-target="#modal-editar-cliente"
                               onClick={() => handleEdit(cliente.id)}
                             >
-                              <i class="bi bi-pencil-square"></i>
+                              <i className="bi bi-pencil-square"></i>
                             </button>
                             <div
                               className="modal fade hide.bs.modal"
@@ -247,7 +247,7 @@ const TablaClientes = () => {
                               data-bs-target="#modal-eliminar-cliente"
                               onClick={() => handleEdit(cliente.id)}
                             >
-                              <i class="bi bi-trash-fill"></i>
+                              <i className="bi bi-trash-fill"></i>
                             </button>
 
                             <div

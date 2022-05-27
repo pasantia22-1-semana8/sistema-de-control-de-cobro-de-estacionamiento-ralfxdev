@@ -137,7 +137,7 @@ const TablaTarifas = () => {
                               data-bs-target="#modal-editar-tarifa"
                               onClick={() => handleEdit(tarifa.id)}
                             >
-                              <i class="bi bi-pencil-square"></i>
+                              <i className="bi bi-pencil-square"></i>
                             </button>
                             <div
                               className="modal fade hide.bs.modal"
@@ -247,7 +247,7 @@ const TablaTarifas = () => {
                               data-bs-target="#modal-eliminar-tarifa"
                               onClick={() => handleEdit(tarifa.id)}
                             >
-                              <i class="bi bi-trash-fill"></i>
+                              <i className="bi bi-trash-fill"></i>
                             </button>
 
                             <div
