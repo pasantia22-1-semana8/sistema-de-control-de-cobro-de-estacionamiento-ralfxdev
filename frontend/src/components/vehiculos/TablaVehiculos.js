@@ -1,3 +1,4 @@
+/* React */
 import React from "react";
 
 /* Context */
@@ -29,6 +30,7 @@ const TablaVehiculos = () => {
   const [showDetail, setShowDetail] = React.useState(true);
   const [error, setError] = React.useState("");
   const [showError, setShowError] = React.useState(true);
+  const [busqueda, setBusqueda] = React.useState("");
 
   /* Context */
   const { onChange, setOnChange } = React.useContext(Context);
@@ -121,9 +123,14 @@ const TablaVehiculos = () => {
       }
     });
   };
+
   const handleClose = () => {
     setShowDetail(false);
     setShowError(false);
+  };
+
+  const handleBusqueda = (e) => {
+    setBusqueda(e.target.value);
   };
 
   React.useEffect(() => {
@@ -132,6 +139,27 @@ const TablaVehiculos = () => {
 
   return (
     <div className="container pt-4">
+      <div className="row justify-content-center mt-3 mb-3">
+        <div className="col-md-6">
+          <form>
+            <div className="input-group mb-3">
+              <input
+                type="text"
+                className="form-control form-control-lg"
+                placeholder="Búsqueda por placa, cliente o tarifa"
+                value={busqueda}
+                onChange={handleBusqueda}
+              />
+              <button
+                className="input-group-text btn-success"
+                disabled="disabled"
+              >
+                <i className="bi bi-search me-2"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
       <div className="row">
         <div className="col-md-12">
           <div className="card">
@@ -167,247 +195,261 @@ const TablaVehiculos = () => {
                         </td>
                       </tr>
                     ) : (
-                      vehiculos.map((vehiculo, index) => (
-                        <tr key={index}>
-                          <td>{index + 1}</td>
-                          <td>{vehiculo.placa}</td>
-                          <td>{vehiculo.marca}</td>
-                          <td>{vehiculo.modelo}</td>
-                          <td>{vehiculo.color}</td>
-                          <td>{vehiculo.cliente.nombre_completo}</td>
-                          <td>{vehiculo.tarifa.nombre}</td>
-                          <td>Q. {vehiculo.tarifa.precio} x min</td>
-                          {vehiculo.vehiculo_status === true ? (
+                      vehiculos
+                        .filter((vehiculo) => {
+                          return (
+                            vehiculo.placa
+                              .toLocaleLowerCase()
+                              .includes(busqueda.toLocaleLowerCase()) ||
+                            vehiculo.cliente.nombre_completo
+                              .toLocaleLowerCase()
+                              .includes(busqueda.toLocaleLowerCase()) ||
+                            vehiculo.tarifa.nombre
+                              .toLocaleLowerCase()
+                              .includes(busqueda.toLocaleLowerCase())
+                          );
+                        })
+                        .map((vehiculo, index) => (
+                          <tr key={index}>
+                            <td>{index + 1}</td>
+                            <td>{vehiculo.placa}</td>
+                            <td>{vehiculo.marca}</td>
+                            <td>{vehiculo.modelo}</td>
+                            <td>{vehiculo.color}</td>
+                            <td>{vehiculo.cliente.nombre_completo}</td>
+                            <td>{vehiculo.tarifa.nombre}</td>
+                            <td>Q. {vehiculo.tarifa.precio} x min</td>
+                            {vehiculo.vehiculo_status === true ? (
+                              <td>
+                                <span className="badge bg-secondary">
+                                  Sin Estacionar
+                                </span>
+                              </td>
+                            ) : (
+                              <td>
+                                <span className="badge bg-success">
+                                  Estacionado
+                                </span>
+                              </td>
+                            )}
                             <td>
-                              <span className="badge bg-secondary">
-                                Sin Estacionar
-                              </span>
-                            </td>
-                          ) : (
-                            <td>
-                              <span className="badge bg-success">
-                                Estacionado
-                              </span>
-                            </td>
-                          )}
-                          <td>
-                            <button
-                              type="button"
-                              className="btn btn-dark"
-                              data-bs-toggle="modal"
-                              data-bs-target="#modal-editar-vehiculo"
-                              onClick={() => handleEdit(vehiculo.id)}
-                            >
-                              <i className="bi bi-pencil-square"></i>
-                            </button>
-                            <div
-                              className="modal fade hide.bs.modal"
-                              id="modal-editar-vehiculo"
-                              data-bs-backdrop="static"
-                              data-bs-keyboard="false"
-                              aria-labelledby="staticBackdropLabel"
-                              aria-hidden="true"
-                            >
-                              <div className="modal-dialog modal-dialog-centered ">
-                                <div className="modal-content">
-                                  <div className="modal-header">
-                                    <h5
-                                      className="modal-title"
-                                      id="staticBackdropLabel"
-                                    >
-                                      Editar Vehículo
-                                    </h5>
-                                  </div>
-                                  <div className="modal-body">
-                                    <form id="form" onSubmit={handleSubmit}>
-                                      {showError && error && (
-                                        <div
-                                          className="alert alert-danger"
-                                          role="alert"
-                                        >
-                                          {error}
-                                        </div>
-                                      )}
-                                      {showDetail && detail && (
-                                        <div
-                                          className="alert alert-success"
-                                          role="alert"
-                                        >
-                                          {detail}
-                                        </div>
-                                      )}
-
-                                      <div className="form-group">
-                                        <div className="form-floating">
-                                          <input
-                                            type="text"
-                                            className="form-control"
-                                            id="floatingInput"
-                                            required
-                                            value={placa}
-                                            onChange={(e) =>
-                                              setPlaca(e.target.value)
-                                            }
-                                          />
-                                          <label>Placa</label>
-                                        </div>
-                                        <div className="form-floating">
-                                          <input
-                                            type="text"
-                                            className="form-control"
-                                            id="floatingInput"
-                                            required
-                                            value={marca}
-                                            onChange={(e) =>
-                                              setMarca(e.target.value)
-                                            }
-                                          />
-                                          <label>Marca</label>
-                                        </div>
-
-                                        <div className="form-floating">
-                                          <input
-                                            type="text"
-                                            className="form-control"
-                                            id="floatingInput"
-                                            required
-                                            value={modelo}
-                                            onChange={(e) =>
-                                              setModelo(e.target.value)
-                                            }
-                                          />
-                                          <label>Modelo</label>
-                                        </div>
-
-                                        <div className="form-floating">
-                                          <select
-                                            className="form-select"
-                                            id="floatingSelect"
-                                            aria-label="Floating label select example"
-                                            required
-                                            onChange={(e) =>
-                                              setCliente_id(e.target.value)
-                                            }
+                              <button
+                                type="button"
+                                className="btn btn-dark"
+                                data-bs-toggle="modal"
+                                data-bs-target="#modal-editar-vehiculo"
+                                onClick={() => handleEdit(vehiculo.id)}
+                              >
+                                <i className="bi bi-pencil-square"></i>
+                              </button>
+                              <div
+                                className="modal fade hide.bs.modal"
+                                id="modal-editar-vehiculo"
+                                data-bs-backdrop="static"
+                                data-bs-keyboard="false"
+                                aria-labelledby="staticBackdropLabel"
+                                aria-hidden="true"
+                              >
+                                <div className="modal-dialog modal-dialog-centered ">
+                                  <div className="modal-content">
+                                    <div className="modal-header">
+                                      <h5
+                                        className="modal-title"
+                                        id="staticBackdropLabel"
+                                      >
+                                        Editar Vehículo
+                                      </h5>
+                                    </div>
+                                    <div className="modal-body">
+                                      <form id="form" onSubmit={handleSubmit}>
+                                        {showError && error && (
+                                          <div
+                                            className="alert alert-danger"
+                                            role="alert"
                                           >
-                                            <option value="">
-                                              Seleccione un cliente
-                                            </option>
-                                            {clientes.map((cliente) => (
-                                              <option
-                                                key={cliente.id}
-                                                value={cliente.id}
-                                              >
-                                                {cliente.nombre_completo}
-                                              </option>
-                                            ))}
-                                          </select>
-                                          <label>Clientes</label>
-                                        </div>
-                                        <div className="form-floating">
-                                          <select
-                                            className="form-select"
-                                            id="floatingSelect"
-                                            aria-label="Floating label select example"
-                                            required
-                                            onChange={(e) =>
-                                              setTarifa_id(e.target.value)
-                                            }
+                                            {error}
+                                          </div>
+                                        )}
+                                        {showDetail && detail && (
+                                          <div
+                                            className="alert alert-success"
+                                            role="alert"
                                           >
-                                            <option value="">
-                                              Seleccione una tarifa
-                                            </option>
-                                            {tarifas.map((tarifa) => (
-                                              <option
-                                                key={tarifa.id}
-                                                value={tarifa.id}
-                                              >
-                                                {tarifa.nombre}
+                                            {detail}
+                                          </div>
+                                        )}
+
+                                        <div className="form-group">
+                                          <div className="form-floating">
+                                            <input
+                                              type="text"
+                                              className="form-control"
+                                              id="floatingInput"
+                                              required
+                                              value={placa}
+                                              onChange={(e) =>
+                                                setPlaca(e.target.value)
+                                              }
+                                            />
+                                            <label>Placa</label>
+                                          </div>
+                                          <div className="form-floating">
+                                            <input
+                                              type="text"
+                                              className="form-control"
+                                              id="floatingInput"
+                                              required
+                                              value={marca}
+                                              onChange={(e) =>
+                                                setMarca(e.target.value)
+                                              }
+                                            />
+                                            <label>Marca</label>
+                                          </div>
+
+                                          <div className="form-floating">
+                                            <input
+                                              type="text"
+                                              className="form-control"
+                                              id="floatingInput"
+                                              required
+                                              value={modelo}
+                                              onChange={(e) =>
+                                                setModelo(e.target.value)
+                                              }
+                                            />
+                                            <label>Modelo</label>
+                                          </div>
+
+                                          <div className="form-floating">
+                                            <select
+                                              className="form-select"
+                                              id="floatingSelect"
+                                              aria-label="Floating label select example"
+                                              required
+                                              onChange={(e) =>
+                                                setCliente_id(e.target.value)
+                                              }
+                                            >
+                                              <option value="">
+                                                Seleccione un cliente
                                               </option>
-                                            ))}
-                                          </select>
-                                          <label>Tarifas</label>
+                                              {clientes.map((cliente) => (
+                                                <option
+                                                  key={cliente.id}
+                                                  value={cliente.id}
+                                                >
+                                                  {cliente.nombre_completo}
+                                                </option>
+                                              ))}
+                                            </select>
+                                            <label>Clientes</label>
+                                          </div>
+                                          <div className="form-floating">
+                                            <select
+                                              className="form-select"
+                                              id="floatingSelect"
+                                              aria-label="Floating label select example"
+                                              required
+                                              onChange={(e) =>
+                                                setTarifa_id(e.target.value)
+                                              }
+                                            >
+                                              <option value="">
+                                                Seleccione una tarifa
+                                              </option>
+                                              {tarifas.map((tarifa) => (
+                                                <option
+                                                  key={tarifa.id}
+                                                  value={tarifa.id}
+                                                >
+                                                  {tarifa.nombre}
+                                                </option>
+                                              ))}
+                                            </select>
+                                            <label>Tarifas</label>
+                                          </div>
                                         </div>
-                                      </div>
-                                      <div className="modal-footer">
-                                        <button
-                                          type="button"
-                                          className="btn btn-danger"
-                                          onClick={handleClose}
-                                          data-bs-dismiss="modal"
-                                        >
-                                          Cerrar
-                                        </button>
-                                        <button
-                                          type="submit"
-                                          className="btn btn-dark"
-                                        >
-                                          Guardar
-                                        </button>
-                                      </div>
-                                    </form>
+                                        <div className="modal-footer">
+                                          <button
+                                            type="button"
+                                            className="btn btn-danger"
+                                            onClick={handleClose}
+                                            data-bs-dismiss="modal"
+                                          >
+                                            Cerrar
+                                          </button>
+                                          <button
+                                            type="submit"
+                                            className="btn btn-dark"
+                                          >
+                                            Guardar
+                                          </button>
+                                        </div>
+                                      </form>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
 
-                            <button
-                              type="button"
-                              className="btn btn-danger"
-                              data-bs-toggle="modal"
-                              data-bs-target="#modal-eliminar-vehiculo"
-                              onClick={() => handleEdit(vehiculo.id)}
-                            >
-                              <i className="bi bi-trash-fill"></i>
-                            </button>
+                              <button
+                                type="button"
+                                className="btn btn-danger"
+                                data-bs-toggle="modal"
+                                data-bs-target="#modal-eliminar-vehiculo"
+                                onClick={() => handleEdit(vehiculo.id)}
+                              >
+                                <i className="bi bi-trash-fill"></i>
+                              </button>
 
-                            <div
-                              className="modal fade"
-                              id="modal-eliminar-vehiculo"
-                              data-bs-backdrop="static"
-                              data-bs-keyboard="false"
-                              aria-labelledby="staticBackdropLabel"
-                              aria-hidden="true"
-                            >
-                              <div className="modal-dialog modal-dialog-centered">
-                                <div className="modal-content">
-                                  <div className="modal-header">
-                                    <h5
-                                      className="modal-title"
-                                      id="staticBackdropLabel"
-                                    >
-                                      ¿Desea{" "}
-                                      <strong className="text-danger">
+                              <div
+                                className="modal fade"
+                                id="modal-eliminar-vehiculo"
+                                data-bs-backdrop="static"
+                                data-bs-keyboard="false"
+                                aria-labelledby="staticBackdropLabel"
+                                aria-hidden="true"
+                              >
+                                <div className="modal-dialog modal-dialog-centered">
+                                  <div className="modal-content">
+                                    <div className="modal-header">
+                                      <h5
+                                        className="modal-title"
+                                        id="staticBackdropLabel"
+                                      >
+                                        ¿Desea{" "}
+                                        <strong className="text-danger">
+                                          Borrar
+                                        </strong>{" "}
+                                        el cliente?
+                                      </h5>
+                                    </div>
+                                    <div className="modal-body">
+                                      Todos los datos serán eliminados.
+                                    </div>
+                                    <div className="modal-footer">
+                                      <button
+                                        type="button"
+                                        className="btn btn-dark"
+                                        data-bs-dismiss="modal"
+                                      >
+                                        Cerrar
+                                      </button>
+                                      <button
+                                        type="button"
+                                        className="btn btn-danger"
+                                        data-bs-dismiss="modal"
+                                        onClick={handleDelete}
+                                      >
                                         Borrar
-                                      </strong>{" "}
-                                      el cliente?
-                                    </h5>
-                                  </div>
-                                  <div className="modal-body">
-                                    Todos los datos serán eliminados.
-                                  </div>
-                                  <div className="modal-footer">
-                                    <button
-                                      type="button"
-                                      className="btn btn-dark"
-                                      data-bs-dismiss="modal"
-                                    >
-                                      Cerrar
-                                    </button>
-                                    <button
-                                      type="button"
-                                      className="btn btn-danger"
-                                      data-bs-dismiss="modal"
-                                      onClick={handleDelete}
-                                    >
-                                      Borrar
-                                    </button>
+                                      </button>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
-                          </td>
-                        </tr>
-                      ))
+                            </td>
+                          </tr>
+                        ))
                     )}
                     {!loading && vehiculos.length === 0 && (
                       <tr>
