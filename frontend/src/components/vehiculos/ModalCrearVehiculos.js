@@ -62,6 +62,7 @@ const ModalCrearVehiculos = () => {
       marca: marca,
       modelo: modelo,
       color: color,
+      vehiculo_status: true,
       cliente_id: cliente_id,
       tarifa_id: tarifa_id,
     })

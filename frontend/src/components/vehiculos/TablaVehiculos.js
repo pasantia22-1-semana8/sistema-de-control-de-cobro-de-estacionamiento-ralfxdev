@@ -104,6 +104,7 @@ const TablaVehiculos = () => {
           marca,
           modelo,
           color,
+          vehiculo_status: true,
           cliente_id,
           tarifa_id,
         })
@@ -175,17 +176,17 @@ const TablaVehiculos = () => {
                           <td>{vehiculo.color}</td>
                           <td>{vehiculo.cliente.nombre_completo}</td>
                           <td>{vehiculo.tarifa.nombre}</td>
-                          <td>{vehiculo.tarifa.precio}</td>
+                          <td>Q. {vehiculo.tarifa.precio} x min</td>
                           {vehiculo.vehiculo_status === true ? (
                             <td>
-                              <span className="badge bg-success">
-                                Disponible
+                              <span className="badge bg-secondary">
+                                Sin Estacionar
                               </span>
                             </td>
                           ) : (
                             <td>
-                              <span className="badge bg-danger">
-                                Parqueado
+                              <span className="badge bg-success">
+                                Estacionado
                               </span>
                             </td>
                           )}

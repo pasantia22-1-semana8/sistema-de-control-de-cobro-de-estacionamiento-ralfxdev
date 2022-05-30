@@ -9,7 +9,8 @@ import Nav from "./components/Nav";
 /* Pages */
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Inicio from "./pages/Inicio";
+import Ingresos from "./pages/Ingresos";
+import Salidas from "./pages/Salidas";
 import Clientes from "./pages/Clientes";
 import Vehiculos from "./pages/Vehiculos";
 import Registros from "./pages/Registros";
@@ -52,7 +53,8 @@ class App extends Component {
           <Nav name={this.state.name} is_superuser={this.state.is_superuser} />
           <div className="main">
             <Routes>
-              <Route path="/" element={<Inicio name={this.state.name} />} />
+              <Route path="/" element={<Ingresos name={this.state.name} />} />
+              <Route path="/salidas" element={<Salidas name={this.state.name} />} />
               <Route path="/clientes" element={<Clientes />} />
               <Route path="/vehiculos" element={<Vehiculos />} />
               <Route
@@ -116,7 +118,8 @@ class App extends Component {
           <Nav name={this.state.name} is_superuser={this.state.is_superuser} />
           <div className="main">
             <Routes>
-              <Route path="/" element={<Inicio name={this.state.name} />} />
+              <Route path="/" element={<Ingresos name={this.state.name} />} />
+              <Route path="/salidas" element={<Salidas name={this.state.name} />} />
               <Route path="/clientes" element={<Clientes />} />
               <Route path="/vehiculos" element={<Vehiculos />} />
               <Route
