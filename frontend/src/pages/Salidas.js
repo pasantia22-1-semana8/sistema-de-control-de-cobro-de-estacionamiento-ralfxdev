@@ -2,7 +2,7 @@
 import React from "react";
 
 /* Componets */
-import TablaRegistros from "../components/registros/TablaRegistros";
+import TablaRegistros from "../components/salidas/TablaSalidas";
 
 const Registros = () => {
   return (
@@ -11,7 +11,7 @@ const Registros = () => {
         <div className="row">
           <div className="col-md-12">
             <h1 className="text-center">
-              <span className="text-danger">MÓDULO</span> REGISTROS
+              <span className="text-danger">PANEL</span> SALIDAS
             </h1>
           </div>
         </div>

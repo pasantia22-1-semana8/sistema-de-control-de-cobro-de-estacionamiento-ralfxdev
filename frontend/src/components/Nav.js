@@ -17,8 +17,14 @@ const Nav = (props) => {
         <ul className="navbar-nav me-auto mb-2 mb-md-0">
           <li className="nav-item">
             <Link className="nav-link" aria-current="page" to="/">
-              <i className="bi bi-house-fill me-2"></i>
-              Inicio
+              <i className="bi bi-node-plus-fill me-2"></i>
+              Ingresos
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" aria-current="page" to="/salidas">
+              <i className="bi bi-node-minus-fill me-2"></i>
+              Salidas
             </Link>
           </li>
           <li className="nav-item">
@@ -72,8 +78,14 @@ const Nav = (props) => {
         <ul className="navbar-nav me-auto mb-2 mb-md-0">
           <li className="nav-item">
             <Link className="nav-link" aria-current="page" to="/">
-              <i className="bi bi-house-fill me-2"></i>
-              Inicio
+              <i className="bi bi-node-plus-fill me-2"></i>
+              Ingresos
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" aria-current="page" to="/salidas">
+              <i className="bi bi-node-minus-fill me-2"></i>
+              Salidas
             </Link>
           </li>
           <li className="nav-item">

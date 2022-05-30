@@ -127,7 +127,7 @@ const TablaTarifas = () => {
                         <tr key={index}>
                           <td>{index + 1}</td>
                           <td>{tarifa.nombre}</td>
-                          <td>{tarifa.precio}</td>
+                          <td>Q. {tarifa.precio} x min</td>
                           <td>{tarifa.descripcion}</td>
                           <td>
                             <button
